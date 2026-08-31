@@ -460,7 +460,7 @@ function writeMarkdown(file, { name, description, version }) {
 test('shared site asset families use the expected cache keys on every page', () => {
   const release = '20260831a';
   const styleRelease = '20260831a';
-  const navigationRelease = '20260831a';
+  const navigationRelease = '20260831b';
   const narrationRelease = '20260831a';
   const pages = [
     'about.html',
@@ -576,7 +576,7 @@ test('build-time SEO manifests cover every readable lesson and expose canonical 
       assert.match(entry.canonicalUrl, /^https:\/\/aieng-zh\.cn\/lessons\//);
       assert.doesNotMatch(entry.canonicalUrl, /[?&](?:track|learningPath)=/);
     } else {
-      assert.match(entry.canonicalUrl, /^https:\/\/aieng-zh\.cn\/lesson\.html\?path=/);
+      assert.match(entry.canonicalUrl, /^https:\/\/aieng-zh\.cn\/lesson\?path=/);
     }
     assert.match(entry.sourceUrl, /^https:\/\/github\.com\/fancyboi999\/ai-engineering-from-scratch-zh\//);
     assert.ok(['course', 'certification'].includes(entry.context.kind));
@@ -622,7 +622,7 @@ test('build-time SEO manifests cover every readable lesson and expose canonical 
   const certificationDiscovery = renderCertificationDiscovery(certifications, certificationManifest);
   assert.equal((catalogDiscovery.match(/href="\/lessons\//g) || []).length, expectedCoursePaths.length);
   assert.equal((certificationDiscovery.match(/href="certification\?id=/g) || []).length, 4);
-  assert.ok((certificationDiscovery.match(/href="lesson\.html\?path=/g) || []).length >= expectedCertificationPaths.length);
+  assert.ok((certificationDiscovery.match(/href="\/lesson\?path=/g) || []).length >= expectedCertificationPaths.length);
   assert.doesNotMatch(catalogDiscovery, /lesson\.html\?/);
 
   for (const file of ['index.html', 'prereqs.html']) {
